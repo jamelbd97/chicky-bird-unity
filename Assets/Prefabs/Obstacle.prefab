@@ -176,6 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8752456077516692599}
   - component: {fileID: 8502027486225987364}
+  - component: {fileID: -4790789788889414895}
   m_Layer: 0
   m_Name: Obstacle
   m_TagString: obstacle
@@ -213,3 +214,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.4565531, y: 8.333703, z: 1.4434533}
   m_Center: {x: 0, y: -3.3034391, z: 0}
+--- !u!114 &-4790789788889414895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8231780509976823501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2022bd6589a18464481e738c8b5dd748, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstaclePrefab: {fileID: 0}
+  itemsSpeed: 6

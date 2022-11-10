@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerBehavior : MonoBehaviour
@@ -16,13 +17,23 @@ public class PlayerBehavior : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (GameBehavior.gameMode == 2)
+		if (GameBehavior.gameRunning)
 		{
-			useAccelerometer();
+			if (GameBehavior.gameMode == 2)
+			{
+				useAccelerometer();
+			}
+			else
+			{
+				useKeyboard();
+			}
 		}
 		else
 		{
-			useKeyboard();
+			if (animator.GetBool("Flying"))
+			{
+				animator.SetBool("Flying", false);
+			}
 		}
 	}
 
@@ -30,8 +41,9 @@ public class PlayerBehavior : MonoBehaviour
 	{
 		if (collider.gameObject.tag == "obstacle")
 		{
+			Handheld.Vibrate();
 			GameBehavior.stopGame();
-		}
+		} else { }
 	}
 
 	private void useKeyboard()
@@ -44,24 +56,19 @@ public class PlayerBehavior : MonoBehaviour
 
 		if (Input.GetKeyDown("right"))
 		{
-			transform.position += Vector3.right;
+			rigidBody.AddForce(Vector3.right * jumpforce, ForceMode.Impulse);
 		}
 
 		if (Input.GetKeyDown("left"))
 		{
-			transform.position += Vector3.left;
+			rigidBody.AddForce(Vector3.left * jumpforce, ForceMode.Impulse);
 		}
 	}
 
 	private void useAccelerometer()
 	{
-		if (Input.GetKeyDown("up"))
-		{
-			rigidBody.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
-			animator.SetBool("Flying", true);
-		}
-
-		transform.Translate(Input.acceleration.x, Input.acceleration.y, 0);
+		animator.SetBool("Flying", true);
+		transform.Translate(Input.acceleration.x * Time.deltaTime * 2, Math.Abs(Input.acceleration.z) * Time.deltaTime * 5, 0);
 	}
 
 }
