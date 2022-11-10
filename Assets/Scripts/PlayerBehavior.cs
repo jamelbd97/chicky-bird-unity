@@ -1,24 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerBehavior : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown("space"))
-        {
-            transform.position += Vector3.up;
-        }
+    public Animator animator;
+    public Rigidbody rigidBody;
+	public float jumpforce = 10f;
 
-        if (Input.GetKeyDown("right"))
+	// Start is called before the first frame update
+	void Start()
+    {
+		
+	}
+
+	// Update is called once per frame
+	void Update()
+    {
+		if (Input.GetKeyDown("up"))
+		{
+			rigidBody.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
+			animator.SetBool("Flying", true);
+		}
+
+		if (Input.GetKeyDown("right"))
         {
             transform.position += Vector3.right;
         }
@@ -28,4 +32,12 @@ public class PlayerBehavior : MonoBehaviour
             transform.position += Vector3.left;
         }
     }
+
+	private void OnTriggerEnter(Collider collider)
+	{
+		if (collider.gameObject.tag == "obstacle")
+		{
+			GameBehavior.stopGame();
+		}
+	}
 }

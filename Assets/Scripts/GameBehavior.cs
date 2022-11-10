@@ -8,6 +8,7 @@ public class GameBehavior : MonoBehaviour
     // 1 = Gyro / 2 = Accelero / 3 = Camera  
     // Variable accessible men ay script
     public static int gameMode;
+    public static bool gameRunning = false;
 
 	public Text topText;
 	public GameObject gyroButton;
@@ -38,5 +39,17 @@ public class GameBehavior : MonoBehaviour
         gyroButton.SetActive(false);
         aceleroButton.SetActive(false);
         cameraButton.SetActive(false);
-    }
+
+        startGame();
+	}
+
+	public static void startGame()
+	{
+        gameRunning = true;
+	}
+
+	public static void stopGame()
+	{
+        gameRunning = false;
+	}
 }

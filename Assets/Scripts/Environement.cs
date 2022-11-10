@@ -1,62 +1,51 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UIElements;
 
 public class Environement : MonoBehaviour
 {
-    public GameObject obstaclePrefab;
+	public GameObject obstaclePrefab;
 
-    public GameObject leftSpawnPoint;
-    public GameObject middleSpawnPoint;
-    public GameObject rightSpawnPoint;
+	public GameObject[] spawnPoints;
 
-    private GameObject currentLeftItem;
-    private GameObject currentMiddleItem;
-    private GameObject currentRightItem;
+	private GameObject[] currentItems;
 
-    public float itemsSpeed = 6f;
-    public float spawnTime = 0.2f;
+	public float itemsSpeed = 6f;
+	public float spawnTime = 0.2f;
 
-    void Start()
-    {
-        InvokeRepeating ("SpawnObstacles", spawnTime, spawnTime);
-    }
+	void Start()
+	{
+		currentItems = new GameObject[spawnPoints.Length];
+		InvokeRepeating("SpawnObstacles", spawnTime, spawnTime);
+	}
 
-    void Update()
-    {
-        if (currentLeftItem != null){
-            currentLeftItem.transform.Translate(new Vector3(0, 0, -itemsSpeed) * Time.deltaTime);
-        }
+	void Update()
+	{
+		if (GameBehavior.gameRunning)
+		{
+			foreach (GameObject currentItem in currentItems)
+			{
+				if (currentItem != null)
+				{
+					currentItem.transform.Translate(new Vector3(0, 0, -itemsSpeed) * Time.deltaTime);
+				}
+			}
+		}
+	}
 
-        if (currentMiddleItem != null){
-            currentMiddleItem.transform.Translate(new Vector3(0, 0, -itemsSpeed) * Time.deltaTime);
-        }
+	void SpawnObstacles()
+	{
+		if (GameBehavior.gameRunning)
+		{
+			int index = Random.Range(0, 6);
 
-        if (currentRightItem != null){
-            currentRightItem.transform.Translate(new Vector3(0, 0, -itemsSpeed) * Time.deltaTime);
-        }
-    }
+			if (currentItems[index] != null)
+			{
+				Destroy(currentItems[index]);
+			}
 
-    void SpawnObstacles()
-    {
-        int x = Random.Range(0,3);
-
-        if (x == 0) {
-            if (currentLeftItem != null){
-                Destroy(currentLeftItem);
-            }
-            currentLeftItem = Instantiate(obstaclePrefab, leftSpawnPoint.transform.position, Quaternion.identity);
-        } else if (x == 1){
-            if (currentMiddleItem != null){
-                Destroy(currentMiddleItem);
-            }
-            currentMiddleItem = Instantiate(obstaclePrefab, middleSpawnPoint.transform.position, Quaternion.identity);
-        } else if (x == 2){
-            if (currentRightItem != null){
-                Destroy(currentRightItem);
-            }
-            currentRightItem = Instantiate(obstaclePrefab, rightSpawnPoint.transform.position, Quaternion.identity);
-        }
-                        
-    }
+			currentItems[index] = Instantiate(obstaclePrefab, spawnPoints[index].transform.position, new Quaternion(0f, 0f, index > 2 ? 90f : 0f, 1f));
+		}
+	}
 }
