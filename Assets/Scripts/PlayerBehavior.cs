@@ -30,6 +30,7 @@ public class PlayerBehavior : MonoBehaviour
 	{
 		if (collider.gameObject.tag == "obstacle")
 		{
+			Handheld.Vibrate();
 			GameBehavior.stopGame();
 		}
 	}
