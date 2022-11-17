@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Windows.Speech;
 
 public class PlayerBehavior : MonoBehaviour
 {
@@ -8,46 +7,6 @@ public class PlayerBehavior : MonoBehaviour
 	public Animator animator;
 	public Rigidbody rigidBody;
 	public float jumpforce = 10f;
-	public GameObject cameraPreview;
-
-	// Voice command vars
-	private string[] keywords;
-	private KeywordRecognizer recognizer;
-	private bool voiceActive = false;
-
-	private void Start()
-	{
-		keywords = new string[3];
-		keywords[0] = "Left";
-		keywords[1] = "Right";
-		keywords[2] = "Jump";
-		recognizer = new KeywordRecognizer(keywords);
-		recognizer.OnPhraseRecognized += OnKeywordsRecognized;
-		recognizer.Start();
-	}
-
-	private void OnKeywordsRecognized(PhraseRecognizedEventArgs args)
-	{
-		Debug.Log("Command: " + args.text);
-
-		if (voiceActive)
-		{
-			if (args.text == keywords[0])
-			{
-				rigidBody.AddForce(Vector3.left * jumpforce, ForceMode.Impulse);
-			}
-
-			if (args.text == keywords[1])
-			{
-				rigidBody.AddForce(Vector3.right * jumpforce, ForceMode.Impulse);
-			}
-
-			if (args.text == keywords[2])
-			{
-				rigidBody.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
-			}
-		}
-	}
 
 	void Update()
 	{
@@ -63,10 +22,7 @@ public class PlayerBehavior : MonoBehaviour
 			}
 			else if (GameBehavior.gameMode == 4)
 			{
-				if (!voiceActive)
-				{
-					voiceActive = true;
-				}
+				useVoice();
 			}
 			else
 			{
@@ -128,5 +84,27 @@ public class PlayerBehavior : MonoBehaviour
 		animator.SetBool("Flying", true);
 		transform.position = new Vector3(normX, normY, transform.position.z);
 		//transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, normX, 0), step);
+	}
+
+	public static bool jump = false, right = false, left = false;
+	private void useVoice()
+	{
+		if (jump)
+		{
+			rigidBody.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
+			jump = false;
+		}
+
+		if (right)
+		{
+			rigidBody.AddForce(Vector3.right * jumpforce, ForceMode.Impulse);
+			right = false;
+		}
+
+		if (left)
+		{
+			rigidBody.AddForce(Vector3.left * jumpforce, ForceMode.Impulse);
+			left = false;
+		}
 	}
 }
