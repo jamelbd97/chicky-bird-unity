@@ -39,6 +39,10 @@ public class GameBehavior : MonoBehaviour
 		{
 			topText.text = "Camera";
 		}
+		else if (modeCode == 4)
+		{
+			topText.text = "Voice";
+		}
 		else
 		{
 			topText.text = "Keyboard";

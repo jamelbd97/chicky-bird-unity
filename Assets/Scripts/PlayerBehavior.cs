@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Windows.Speech;
 
 public class PlayerBehavior : MonoBehaviour
 {
@@ -8,13 +9,46 @@ public class PlayerBehavior : MonoBehaviour
 	public Rigidbody rigidBody;
 	public float jumpforce = 10f;
 
-	// Start is called before the first frame update
-	void Start()
-	{
 
+	// Voice command vars
+	private string[] keywords;
+	private KeywordRecognizer recognizer;
+	private bool voiceActive = false;
+
+	private void Start()
+	{
+		keywords = new string[3];
+		keywords[0] = "Left";
+		keywords[1] = "Right";
+		keywords[2] = "Jump";
+		recognizer = new KeywordRecognizer(keywords);
+		recognizer.OnPhraseRecognized += OnKeywordsRecognized;
+		recognizer.Start();
 	}
 
-	// Update is called once per frame
+	private void OnKeywordsRecognized(PhraseRecognizedEventArgs args)
+	{
+		Debug.Log("Command: " + args.text);
+
+		if (voiceActive)
+		{
+			if (args.text == keywords[0])
+			{
+				rigidBody.AddForce(Vector3.left * jumpforce, ForceMode.Impulse);
+			}
+
+			if (args.text == keywords[1])
+			{
+				rigidBody.AddForce(Vector3.right * jumpforce, ForceMode.Impulse);
+			}
+
+			if (args.text == keywords[2])
+			{
+				rigidBody.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
+			}
+		}
+	}
+
 	void Update()
 	{
 		if (GameBehavior.gameRunning)
@@ -22,6 +56,17 @@ public class PlayerBehavior : MonoBehaviour
 			if (GameBehavior.gameMode == 2)
 			{
 				useAccelerometer();
+			}
+			else if (GameBehavior.gameMode == 3)
+			{
+				useCamera();
+			}
+			else if (GameBehavior.gameMode == 4)
+			{
+				if (!voiceActive)
+				{
+					voiceActive = true;
+				}
 			}
 			else
 			{
@@ -43,7 +88,8 @@ public class PlayerBehavior : MonoBehaviour
 		{
 			Handheld.Vibrate();
 			GameBehavior.stopGame();
-		} else { }
+		}
+		else { }
 	}
 
 	private void useKeyboard()
@@ -71,4 +117,8 @@ public class PlayerBehavior : MonoBehaviour
 		transform.Translate(Input.acceleration.x * Time.deltaTime * 2, Math.Abs(Input.acceleration.z) * Time.deltaTime * 5, 0);
 	}
 
+	private void useCamera()
+	{
+
+	}
 }
