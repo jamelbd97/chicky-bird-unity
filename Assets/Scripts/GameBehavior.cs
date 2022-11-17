@@ -41,6 +41,7 @@ public class GameBehavior : MonoBehaviour
 		}
 		else if (modeCode == 4)
 		{
+			ObstacleBehavior.itemsSpeed = 3;
 			topText.text = "Voice";
 		}
 		else
