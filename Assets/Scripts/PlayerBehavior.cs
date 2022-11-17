@@ -8,7 +8,7 @@ public class PlayerBehavior : MonoBehaviour
 	public Animator animator;
 	public Rigidbody rigidBody;
 	public float jumpforce = 10f;
-
+	public GameObject cameraPreview;
 
 	// Voice command vars
 	private string[] keywords;
@@ -119,6 +119,14 @@ public class PlayerBehavior : MonoBehaviour
 
 	private void useCamera()
 	{
+		cameraPreview.SetActive(true);
+		rigidBody.useGravity = false;
 
+		float normX = ((FaceDetector.x * 4) / 1000) - 1;
+		float normY = ((FaceDetector.y * 4) / 1000) + 0;
+
+		animator.SetBool("Flying", true);
+		transform.position = new Vector3(normX, normY, transform.position.z);
+		//transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, normX, 0), step);
 	}
 }
