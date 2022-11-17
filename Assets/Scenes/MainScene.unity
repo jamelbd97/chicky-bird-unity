@@ -710,6 +710,7 @@ GameObject:
   m_Component:
   - component: {fileID: 444106501}
   - component: {fileID: 444106500}
+  - component: {fileID: 444106502}
   m_Layer: 0
   m_Name: GameBehavior
   m_TagString: Untagged
@@ -746,6 +747,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &444106502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444106499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d75fcf0257f195149b6a18eca61c5d06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectSwipeOnlyAfterRelease: 0
+  SWIPE_THRESHOLD: 20
 --- !u!1001 &444543423
 PrefabInstance:
   m_ObjectHideFlags: 0

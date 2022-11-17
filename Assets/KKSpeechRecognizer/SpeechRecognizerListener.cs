@@ -52,7 +52,7 @@ namespace KKSpeech
 
 		private void Update()
 		{
-			if (GameBehavior.gameRunning && !isStarted)
+			if (GameBehavior.gameRunning && GameBehavior.gameMode == 3 && !isStarted)
 			{
 				SpeechRecognizer.StartRecording(true);
 				isStarted = true;

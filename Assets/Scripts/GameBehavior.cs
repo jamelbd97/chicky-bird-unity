@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameBehavior : MonoBehaviour
 {
-	// 0 = Keyboard / 1 = Gyro / 2 = Accelero / 3 = Camera  
+	// 0 = Swipe / 1 = Accelerometre / 2 = Camera / 3 = Voice  
 	// Variable accessible men ay script
 	public static int gameMode;
 	public static bool gameRunning = false;
@@ -27,26 +27,22 @@ public class GameBehavior : MonoBehaviour
 	{
 		gameMode = modeCode;
 
-		if (modeCode == 1)
+		if (modeCode == 0)
 		{
-			topText.text = "Gyroscope";
+			topText.text = "Swipe";
 		}
-		else if (modeCode == 2)
+		else if (modeCode == 1)
 		{
 			topText.text = "Accelerometre";
 		}
-		else if (modeCode == 3)
+		else if (modeCode == 2)
 		{
 			topText.text = "Camera";
 		}
-		else if (modeCode == 4)
+		else if (modeCode == 3)
 		{
 			ObstacleBehavior.itemsSpeed = 3;
 			topText.text = "Voice";
-		}
-		else
-		{
-			topText.text = "Keyboard";
 		}
 
 		menu.SetActive(false);
