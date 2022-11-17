@@ -7,26 +7,28 @@ public class PlayerBehavior : MonoBehaviour
 	public Animator animator;
 	public Rigidbody rigidBody;
 	public float jumpforce = 10f;
+	
+	public static bool jump = false, right = false, left = false;
 
 	void Update()
 	{
 		if (GameBehavior.gameRunning)
 		{
-			if (GameBehavior.gameMode == 2)
+			if (GameBehavior.gameMode == 0)
+			{
+				useSwipe();
+			}
+			else if (GameBehavior.gameMode == 1)
 			{
 				useAccelerometer();
 			}
-			else if (GameBehavior.gameMode == 3)
+			else if (GameBehavior.gameMode == 2)
 			{
 				useCamera();
 			}
-			else if (GameBehavior.gameMode == 4)
+			else if (GameBehavior.gameMode == 3)
 			{
 				useVoice();
-			}
-			else
-			{
-				useKeyboard();
 			}
 		}
 		else
@@ -48,22 +50,25 @@ public class PlayerBehavior : MonoBehaviour
 		else { }
 	}
 
-	private void useKeyboard()
+	private void useSwipe()
 	{
-		if (Input.GetKeyDown("up"))
+		if (jump)
 		{
 			rigidBody.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
 			animator.SetBool("Flying", true);
+			jump = false;
 		}
 
-		if (Input.GetKeyDown("right"))
+		if (right)
 		{
 			rigidBody.AddForce(Vector3.right * jumpforce, ForceMode.Impulse);
+			right = false;
 		}
 
-		if (Input.GetKeyDown("left"))
+		if (left)
 		{
 			rigidBody.AddForce(Vector3.left * jumpforce, ForceMode.Impulse);
+			left = false;
 		}
 	}
 
@@ -78,7 +83,6 @@ public class PlayerBehavior : MonoBehaviour
 
 	}
 
-	public static bool jump = false, right = false, left = false;
 	private void useVoice()
 	{
 		if (jump)
