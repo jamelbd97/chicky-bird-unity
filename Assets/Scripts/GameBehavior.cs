@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameBehavior : MonoBehaviour
 {
@@ -66,6 +67,7 @@ public class GameBehavior : MonoBehaviour
 	public static void stopGame()
 	{
 		gameRunning = false;
+		SceneManager.LoadScene("SampleScene");
 	}
 
 	private static void resetGame()
