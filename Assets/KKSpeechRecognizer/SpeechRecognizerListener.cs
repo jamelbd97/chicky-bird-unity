@@ -40,8 +40,12 @@ namespace KKSpeech
 		public UnityEvent onEndOfSpeech = new UnityEvent();
 		public UnityEvent onReadyForSpeech = new UnityEvent();
 
+		private bool isThereErrorBool = true;
+
 		private void Start()
 		{
+			InvokeRepeating("isThereError", 1, 1);
+
 			if (!Permission.HasUserAuthorizedPermission(Permission.Microphone))
 			{
 				Permission.RequestUserPermission(Permission.Microphone);
@@ -49,6 +53,16 @@ namespace KKSpeech
 		}
 
 		public static bool isStarted = false;
+
+
+		private void isThereError()
+		{
+			if (GameBehavior.gameRunning && GameBehavior.gameMode == 3)
+			{
+				isThereErrorBool = true;
+			}
+		}
+
 
 		private void Update()
 		{
@@ -122,8 +136,12 @@ namespace KKSpeech
 		void FailedDuringRecording(string reason)
 		{
 			Debug.Log("SPEECH RECOGNIZER : FailedDuringRecording " + reason);
-			//SpeechRecognizer.StopIfRecording();
-			//SpeechRecognizer.StartRecording(true);
+			if (isThereErrorBool)
+            {
+				SpeechRecognizer.StopIfRecording();
+				SpeechRecognizer.StartRecording(true);
+				isThereErrorBool = false;
+			}
 
 			onErrorDuringRecording.Invoke(reason);
 		}

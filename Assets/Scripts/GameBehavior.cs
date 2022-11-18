@@ -43,6 +43,7 @@ public class GameBehavior : MonoBehaviour
 		}
 		else if (modeCode == 2)
 		{
+			ObstacleBehavior.itemsSpeed = 2;
 			topText.text = "Camera";
 		}
 		else if (modeCode == 3)

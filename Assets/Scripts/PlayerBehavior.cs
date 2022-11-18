@@ -85,7 +85,7 @@ public class PlayerBehavior : MonoBehaviour
 		cameraPreview.SetActive(true);
 		rigidBody.useGravity = false;
 
-		float normX = ((FaceDetector.x * 4) / 1000) - 1;
+		float normX = ((FaceDetector.x * 4) / 1000) - 2;
 		float normY = ((FaceDetector.y * 4) / 1000) + 0;
 
 		animator.SetBool("Flying", true);
