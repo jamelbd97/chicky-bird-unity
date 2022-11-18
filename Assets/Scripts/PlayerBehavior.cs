@@ -9,6 +9,7 @@ public class PlayerBehavior : MonoBehaviour
 	public float jumpforce = 10f;
 	
 	public static bool jump = false, right = false, left = false;
+	public static bool jumpVoice = false, rightVoice = false, leftVoice = false;
 
 	void Update()
 	{
@@ -84,7 +85,7 @@ public class PlayerBehavior : MonoBehaviour
 		cameraPreview.SetActive(true);
 		rigidBody.useGravity = false;
 
-		float normX = ((FaceDetector.x * 4) / 1000) - 1;
+		float normX = ((FaceDetector.x * 4) / 1000) - 2;
 		float normY = ((FaceDetector.y * 4) / 1000) + 0;
 
 		animator.SetBool("Flying", true);
@@ -94,22 +95,22 @@ public class PlayerBehavior : MonoBehaviour
 
 	private void useVoice()
 	{
-		if (jump)
+		if (jumpVoice)
 		{
 			rigidBody.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
-			jump = false;
+			jumpVoice = false;
 		}
 
-		if (right)
+		if (rightVoice)
 		{
 			rigidBody.AddForce(Vector3.right * jumpforce, ForceMode.Impulse);
-			right = false;
+			rightVoice = false;
 		}
 
-		if (left)
+		if (leftVoice)
 		{
 			rigidBody.AddForce(Vector3.left * jumpforce, ForceMode.Impulse);
-			left = false;
+			leftVoice = false;
 		}
 	}
 }

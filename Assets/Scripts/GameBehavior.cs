@@ -44,11 +44,15 @@ public class GameBehavior : MonoBehaviour
 		}
 		else if (modeCode == 2)
 		{
+			ObstacleBehavior.itemsSpeed = 2;
 			topText.text = "Camera";
 		}
 		else if (modeCode == 3)
 		{
-			ObstacleBehavior.itemsSpeed = 3;
+			ObstacleBehavior.itemsSpeed = 1;
+			Environement.isHard = false;
+			Environement.isVoice = true;
+
 			topText.text = "Voice";
 		}
 
@@ -66,6 +70,10 @@ public class GameBehavior : MonoBehaviour
 
 	public static void stopGame()
 	{
+		ObstacleBehavior.itemsSpeed = 6;
+		Environement.isHard = true;
+		Environement.isVoice = false;
+
 		gameRunning = false;
 		SceneManager.LoadScene("SampleScene");
 	}
