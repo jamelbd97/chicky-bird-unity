@@ -47,7 +47,10 @@ public class GameBehavior : MonoBehaviour
 		}
 		else if (modeCode == 3)
 		{
-			ObstacleBehavior.itemsSpeed = 3;
+			ObstacleBehavior.itemsSpeed = 1;
+			Environement.isHard = false;
+			Environement.isVoice = true;
+
 			topText.text = "Voice";
 		}
 
@@ -65,6 +68,10 @@ public class GameBehavior : MonoBehaviour
 
 	public static void stopGame()
 	{
+		ObstacleBehavior.itemsSpeed = 6;
+		Environement.isHard = true;
+		Environement.isVoice = false;
+
 		gameRunning = false;
 	}
 

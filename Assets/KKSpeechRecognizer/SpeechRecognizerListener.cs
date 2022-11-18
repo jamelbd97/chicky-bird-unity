@@ -48,7 +48,7 @@ namespace KKSpeech
 			}
 		}
 
-		bool isStarted = false;
+		public static bool isStarted = false;
 
 		private void Update()
 		{
@@ -56,6 +56,12 @@ namespace KKSpeech
 			{
 				SpeechRecognizer.StartRecording(true);
 				isStarted = true;
+			}
+
+			if (!GameBehavior.gameRunning)
+			{
+				isStarted = false;
+
 			}
 		}
 
@@ -69,26 +75,39 @@ namespace KKSpeech
 		{
 			Debug.Log("SPEECH RECOGNIZER : GotPartialResult " + result);
 			onPartialResults.Invoke(result);
+			if (result.Contains("salut"))
+			{
+				PlayerBehavior.jump = true;
+			}
+			if (result.Contains("bonjour"))
+			{
+				PlayerBehavior.right = true;
+			}
+			if (result.Contains("bonsoir"))
+			{
+				PlayerBehavior.left = true;
+			}
+			SpeechRecognizer.StopIfRecording();
+			SpeechRecognizer.StartRecording(true);
 		}
 
 		void GotFinalResult(string result)
 		{
 			Debug.Log("SPEECH RECOGNIZER : GotFinalResult " + result);
+
+			if (result.Contains("salut"))
+			{
+				PlayerBehavior.jumpVoice = true;
+			}
+			if (result.Contains("droite"))
+			{
+				PlayerBehavior.rightVoice = true;
+			}
+			if (result.Contains("gauche"))
+			{
+				PlayerBehavior.leftVoice = true;
+			}
 			SpeechRecognizer.StopIfRecording();
-			if (result == "saute")
-			{
-				PlayerBehavior.jump = true;
-			}
-
-			if (result == "droite")
-			{
-				PlayerBehavior.right = true;
-			}
-
-			if (result == "gauche")
-			{
-				PlayerBehavior.left = true;
-			}
 			SpeechRecognizer.StartRecording(true);
 
 			onFinalResults.Invoke(result);
@@ -103,8 +122,8 @@ namespace KKSpeech
 		void FailedDuringRecording(string reason)
 		{
 			Debug.Log("SPEECH RECOGNIZER : FailedDuringRecording " + reason);
-			SpeechRecognizer.StopIfRecording();
-			SpeechRecognizer.StartRecording(true);
+			//SpeechRecognizer.StopIfRecording();
+			//SpeechRecognizer.StartRecording(true);
 
 			onErrorDuringRecording.Invoke(reason);
 		}
