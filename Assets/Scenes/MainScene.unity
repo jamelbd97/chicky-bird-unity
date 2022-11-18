@@ -178,7 +178,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 47659528}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: 7.0300007, z: 0}
+  m_LocalPosition: {x: -8.9, y: 7.0300007, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -442,10 +442,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea607a6780843a341ad56a66bd147354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraPreview: {fileID: 2110437312}
   animator: {fileID: 173028975}
   rigidBody: {fileID: 173028977}
   jumpforce: 5
-  cameraPreview: {fileID: 2110437312}
 --- !u!54 &173028977
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -731,6 +731,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   topText: {fileID: 788651519}
   menu: {fileID: 396967761}
+  restartButton: {fileID: 0}
 --- !u!4 &444106501
 Transform:
   m_ObjectHideFlags: 0
@@ -871,6 +872,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ChickyBird
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 853c950bfd6501448ad4fd17a11e70d5,
+        type: 3}
+      propertyPath: m_TagString
+      value: player
       objectReference: {fileID: 0}
     - target: {fileID: 8244103138397038884, guid: 853c950bfd6501448ad4fd17a11e70d5,
         type: 3}
@@ -1523,6 +1529,37 @@ Transform:
   m_Father: {fileID: 170858002}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &810556136
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 810556137}
+  m_Layer: 0
+  m_Name: CenterCloudSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &810556137
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810556136}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.72, y: 7.03, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1041554478}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1640,6 +1677,7 @@ Transform:
   - {fileID: 40198483}
   - {fileID: 47659529}
   - {fileID: 1965881574}
+  - {fileID: 810556137}
   m_Father: {fileID: 800503083}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1666,6 +1704,7 @@ MonoBehaviour:
     type: 3}
   spawnPoints:
   - {fileID: 47659528}
+  - {fileID: 810556136}
   - {fileID: 1965881573}
   - {fileID: 745403029}
   - {fileID: 40198482}
@@ -2286,7 +2325,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1585709366}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 54.646, z: 0}
+  m_LocalPosition: {x: 0, y: 33.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2941,7 +2980,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2110437313
 MonoBehaviour:
   m_ObjectHideFlags: 0

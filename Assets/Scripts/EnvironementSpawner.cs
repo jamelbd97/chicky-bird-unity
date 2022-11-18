@@ -14,7 +14,7 @@ public class EnvironementSpawner : MonoBehaviour
 	private GameObject[] currentItems;
 	
 	public float treeSpawnTime = 0.2f;
-	public float cloudSpawnTime = 0.2f;
+	public float cloudSpawnTime = 0.4f;
 
 	void Start()
 	{
@@ -28,6 +28,7 @@ public class EnvironementSpawner : MonoBehaviour
 		if (GameBehavior.gameRunning)
 		{
 			int index = Random.Range(0, 2);
+			int pointIndex = Random.Range(0, 3);
 
 			GameObject prefab;
 
@@ -40,7 +41,7 @@ public class EnvironementSpawner : MonoBehaviour
 				prefab = cloudVariantPrefab;
 			}
 
-			currentItems[index] = Instantiate(prefab, spawnPoints[index].transform.position, Quaternion.identity, parent.transform);
+			currentItems[index] = Instantiate(prefab, spawnPoints[pointIndex].transform.position, Quaternion.identity, parent.transform);
 		}
 	}
 
@@ -48,11 +49,12 @@ public class EnvironementSpawner : MonoBehaviour
 	{
 		if (GameBehavior.gameRunning)
 		{
-			int index = Random.Range(2, 4);
+			int index = Random.Range(0, 2);
+			int pointIndex = Random.Range(3, 5);
 
 			GameObject prefab;
 
-			if (index == 2)
+			if (index == 0)
 			{
 				prefab = treePrefab;
 			}
@@ -61,7 +63,7 @@ public class EnvironementSpawner : MonoBehaviour
 				prefab = treeVariantPrefab;
 			}
 
-			currentItems[index] = Instantiate(prefab, spawnPoints[index].transform.position, Quaternion.identity, parent.transform);
+			currentItems[index] = Instantiate(prefab, spawnPoints[pointIndex].transform.position, Quaternion.identity, parent.transform);
 		}
 	}
 }

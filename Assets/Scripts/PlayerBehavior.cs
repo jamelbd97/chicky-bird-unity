@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerBehavior : MonoBehaviour
 {
-
+	public GameObject cameraPreview;
 	public Animator animator;
 	public Rigidbody rigidBody;
 	public float jumpforce = 10f;
@@ -46,6 +46,7 @@ public class PlayerBehavior : MonoBehaviour
 		{
 			Handheld.Vibrate();
 			GameBehavior.stopGame();
+			cameraPreview.SetActive(false);
 		}
 		else { }
 	}

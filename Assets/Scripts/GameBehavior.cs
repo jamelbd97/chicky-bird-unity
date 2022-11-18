@@ -12,6 +12,9 @@ public class GameBehavior : MonoBehaviour
 
 	public Text topText;
 	public GameObject menu;
+	public GameObject restartButton;
+
+	private bool lost = false;
 
 	void Start()
 	{
@@ -20,7 +23,10 @@ public class GameBehavior : MonoBehaviour
 
 	void Update()
 	{
-
+		if (!gameRunning)
+		{
+			menu.SetActive(true);
+		}
 	}
 
 	public void chooseMode(int modeCode)
@@ -52,11 +58,25 @@ public class GameBehavior : MonoBehaviour
 
 	public static void startGame()
 	{
+
 		gameRunning = true;
+		resetGame();
 	}
 
 	public static void stopGame()
 	{
 		gameRunning = false;
+	}
+
+	private static void resetGame()
+	{
+		GameObject player = GameObject.FindGameObjectWithTag("player");
+
+		player.transform.position = new Vector3(0, 0, player.transform.position.z);
+		GameObject[] environementObjects = GameObject.FindGameObjectsWithTag("obstacle");
+		foreach (GameObject environementObject in environementObjects)
+		{
+			Destroy(environementObject);
+		}
 	}
 }

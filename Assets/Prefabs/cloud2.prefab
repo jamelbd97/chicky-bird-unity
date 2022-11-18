@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3141376552703377721}
   - component: {fileID: 3141376552704476153}
   - component: {fileID: 2049074951118045339}
-  - component: {fileID: -2539190275521749060}
   m_Layer: 0
   m_Name: cloud2
   m_TagString: environement
@@ -98,16 +97,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.03553053, y: 0.031564992, z: 0.033549406}
   m_Center: {x: 0.06644295, y: 0.023782402, z: -0.019819023}
---- !u!114 &-2539190275521749060
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3141376552702549307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2022bd6589a18464481e738c8b5dd748, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemsSpeed: 3
